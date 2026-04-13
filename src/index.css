@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --mm-bg: #eef2f6;
+  --mm-navy: #0f3a55;
+  --mm-muted: #4f6f8f;
+  --mm-primary: #1b5f89;
+  --mm-primary-hover: #0f4160;
+  --mm-panel-shadow: 0 20px 35px -12px rgba(19, 53, 80, 0.2);
+  --mm-header-shadow: 0 12px 30px -10px rgba(0, 40, 70, 0.15);
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--mm-bg);
+  color: #0f172a;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mm-panel {
+  border-radius: 2rem;
+  background: #fff;
+  box-shadow: var(--mm-panel-shadow);
+}
+
+.mm-header-bar {
+  border-radius: 1.875rem;
+  background: #fff;
+  box-shadow: var(--mm-header-shadow);
+}
+
+.mm-gradient-title {
+  background: linear-gradient(145deg, #0a2a3f, #1c5f89);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.mm-input {
+  border-radius: 9999px;
+  border: 1px solid #ccddee;
+  background: #fff;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(15, 58, 85, 0.04);
+}
+
+.mm-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(27, 95, 137, 0.2);
+}
+
+.mm-med-card {
+  border-radius: 1.5rem;
+  background: #f9fcff;
+  border-left: 6px solid #2670a3;
+  box-shadow: 0 8px 24px -12px rgba(19, 53, 80, 0.15);
+}
