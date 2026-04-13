@@ -2,12 +2,26 @@
 function normalizeApiBase(raw: string): string {
   let base = raw.trim().replace(/\/+$/, '')
   if (base.endsWith('/api')) base = base.slice(0, -4).replace(/\/+$/, '')
+
+  // If someone sets "example.com" (no scheme), fetch() treats it as a relative
+  // path under the current origin, causing POSTs to hit the Vercel domain and 405.
+  if (base && !/^https?:\/\//i.test(base)) {
+    const hostOnly = base.replace(/^\/+/, '')
+    const isLocal =
+      hostOnly.startsWith('localhost') || hostOnly.startsWith('127.0.0.1')
+    base = `${isLocal ? 'http' : 'https'}://${hostOnly}`
+  }
   return base
 }
 
 const API_BASE_URL = normalizeApiBase(
   import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:4000',
 )
+
+if (import.meta.env.DEV) {
+  // eslint-disable-next-line no-console
+  console.log('[MedMind] API base URL:', API_BASE_URL)
+}
 
 export function getApiBaseUrl() {
   return API_BASE_URL
