@@ -122,10 +122,18 @@ npm run dev
 - **Mongo connection fails**: verify MongoDB is running and `MONGO_URI` is correct.
 - **CORS/auth issues**: ensure `VITE_API_BASE_URL` matches backend URL and port.
 - **OCR accuracy**: better lighting/cropping improves results; consider switching providers if needed.
+- **Vercel 404 on refresh / deep links**: keep `vercel.json`, or use **Docker + Nginx** (section below).
+
+## Deploy frontend (Docker + Nginx)
+
+For Railway, Fly.io, ECS, Kubernetes, etc.: `Dockerfile.frontend` builds Vite output and serves it with Nginx (`try_files` → SPA routes work on refresh).
+
+```bash
+docker build -f Dockerfile.frontend --build-arg VITE_API_BASE_URL=https://your-api.example.com -t medmind-frontend .
+docker compose -f docker-compose.frontend.yml up --build
+```
+
+Open `http://localhost:8080`. GitHub Actions (`.github/workflows/frontend-container.yml`) pushes to **GHCR** as `ghcr.io/<owner>/<repo>-frontend:latest`. Set repository variable **`VITE_API_BASE_URL`** under Actions variables so the production bundle calls your API.
 
 
 
-
-Kay karaych hoy be 
-  fakt te  rimander  and fornt end  badlvun taku sarv working asl  pahije  bass  baki ter jast kahi nhai   ba ani  mess ale pahijy reminder chye    user le  jynchye no add ass mhnje bapale ani potyle  samjl pahijay 
-  OKK======
