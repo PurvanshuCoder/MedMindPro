@@ -1,4 +1,13 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:4000'
+/** Backend root only (no `/api` suffix). Trailing slashes stripped. */
+function normalizeApiBase(raw: string): string {
+  let base = raw.trim().replace(/\/+$/, '')
+  if (base.endsWith('/api')) base = base.slice(0, -4).replace(/\/+$/, '')
+  return base
+}
+
+const API_BASE_URL = normalizeApiBase(
+  import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:4000',
+)
 
 export function getApiBaseUrl() {
   return API_BASE_URL
@@ -27,6 +36,7 @@ export async function apiRequestJson<T>(
   const url = `${API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`
 
   const res = await fetch(url, {
+    redirect: 'follow',
     method: init?.method ?? 'GET',
     headers: {
       ...(init?.body !== undefined && !(init.body instanceof FormData)
@@ -65,6 +75,7 @@ export async function apiFetch<T>(
   const url = `${API_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`
 
   const res = await fetch(url, {
+    redirect: 'follow',
     method: options?.method ?? 'GET',
     headers: {
       ...(options?.headers ?? {}),
