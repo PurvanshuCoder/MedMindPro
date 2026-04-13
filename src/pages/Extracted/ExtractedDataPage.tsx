@@ -297,7 +297,7 @@ export function ExtractedDataPage() {
         </div>
       </Card>
 
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-blue-50 bg-white/95 p-3 backdrop-blur md:static md:border-0 md:bg-transparent md:p-0">
+      <div className="fixed bottom-[calc(env(safe-area-inset-bottom)+4.75rem)] left-0 right-0 z-50 border-t border-blue-50 bg-white/95 p-3 backdrop-blur md:static md:border-0 md:bg-transparent md:p-0">
         <div className="mx-auto w-full max-w-2xl md:pb-0">
           <Button
             className="w-full"
